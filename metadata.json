@@ -1,0 +1,6 @@
+{
+  "name": "Abir Mahmud Pritam Developer Portfolio",
+  "description": "A highly interactive, developer-themed portfolio website for Abir Mahmud Pritam featuring an AI Assistant co-pilot, an interactive terminal, custom glassmorphism components, and complete resume sections.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
