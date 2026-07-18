@@ -42,13 +42,14 @@ import {
   Share2,
   MoreHorizontal,
   Globe,
+  Camera,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { TypewriterCode } from "./components/TypewriterCode";
 import { BackgroundCodeRain } from "./components/BackgroundCodeRain";
 import { InteractivePortrait } from "./components/InteractivePortrait";
 
-import { Project, Skill, Tool, Publication, LinkedInPost } from "./types";
+import { Project, Skill, Tool, Publication } from "./types";
 import {
   initialProjects,
   initialSkills,
@@ -57,13 +58,12 @@ import {
   educationList,
   certifications,
   initialPublications,
-  initialLinkedInPosts,
 } from "./data";
 
 import Header from "./components/Header";
 import ProjectCard from "./components/ProjectCard";
 import SkillSection from "./components/SkillSection";
-import LinkedInFeed from "./components/LinkedInFeed";
+
 
 interface BlogPost {
   id: string;
@@ -396,17 +396,27 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen relative text-slate-800 selection:bg-purple-200 selection:text-purple-900">
-      {/* Fixed background image of the tech background with rich purple gradient and glowing tech icons */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0 bg-cover bg-center bg-no-repeat bg-[#0c0620]"
-        style={{ 
-          backgroundImage: `url("/src/assets/images/tech_background_1784342004070.jpg")`,
-        }}
-      >
-        {/* Subtle dark overlays to enrich depth and contrast */}
-        <div className="absolute inset-0 bg-slate-950/10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-slate-950/30" />
+    <div className="min-h-screen relative text-slate-800 selection:bg-purple-200 selection:text-purple-900 bg-[#FAF9FF]">
+      {/* Fixed light background container with beautiful 60% blurred bgpic.png and global coding rain */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Base light theme background */}
+        <div className="absolute inset-0 bg-[#FCFAFF]" />
+        
+        {/* The uploaded bgpic.png background image, scaled slightly and blurred by 60% */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 filter blur-[18px] opacity-[0.65]"
+          style={{ 
+            backgroundImage: `url("/src/assets/images/bgpic.png")`,
+          }}
+        />
+        
+        {/* Beautiful light white-purple tint overlay to keep the theme incredibly bright and matching "white theme website" */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-purple-50/50 to-white/80 mix-blend-overlay" />
+        
+        {/* Global matrix-style coding rain streaming across the entire website, fixed behind everything */}
+        <div className="absolute inset-0 opacity-100">
+          <BackgroundCodeRain />
+        </div>
       </div>
 
       {/* Main navigation Header */}
@@ -417,33 +427,29 @@ export default function App() {
       />
 
       {/* Hero Presentation Stage */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden z-10">
-        {/* Soft ambient background code streaming representing active development - highly visible now! */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-85">
-          <BackgroundCodeRain />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          
+      <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 lg:pb-0 overflow-hidden z-10">
+        
+        {/* MOBILE VERSION: Keep the original layout for mobile view (vertical stack) */}
+        <div className="lg:hidden max-w-7xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 gap-12 items-center relative z-10 pt-4">
           {/* Hero Bio Left Panel */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-7 space-y-6 flex flex-col justify-center"
+            className="space-y-6 flex flex-col justify-center"
           >
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 w-fit">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-100/80 border border-purple-200/80 w-fit shadow-sm">
               <span className="flex h-2 w-2 relative">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${getAccentBgClass()}`}></span>
                 <span className={`relative inline-flex rounded-full h-2 w-2 ${getAccentBgClass()}`}></span>
               </span>
-              <span className="text-xs font-mono font-bold text-purple-300 tracking-wide uppercase">
+              <span className="text-xs font-mono font-bold text-purple-700 tracking-wide uppercase">
                 Available for Projects & Tech Internships
               </span>
             </div>
 
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-white tracking-tight leading-none">
+              <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-none">
                 <motion.span 
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -457,7 +463,7 @@ export default function App() {
                   initial={{ opacity: 0, y: 30, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100, damping: 12 }}
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-200 to-indigo-200 font-black tracking-tight drop-shadow-sm"
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-600 font-black tracking-tight drop-shadow-sm"
                 >
                   {name}
                 </motion.span>
@@ -470,23 +476,23 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-1"
               >
-                <div className="flex items-center space-x-2 bg-purple-950/40 border border-purple-500/20 px-3.5 py-1.5 rounded-full shadow-sm hover:border-purple-300 transition-colors">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-400 animate-ping" />
-                  <span className="text-xs sm:text-sm font-mono font-black uppercase text-purple-200">
+                <div className="flex items-center space-x-2 bg-purple-50/80 border border-purple-200/50 px-3.5 py-1.5 rounded-full shadow-sm hover:border-purple-300 transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-purple-600 animate-ping" />
+                  <span className="text-xs sm:text-sm font-mono font-black uppercase text-purple-700">
                     developer, graphics and ui ux
                   </span>
                 </div>
                 
-                <span className="text-purple-400/60 font-mono text-base font-extrabold hidden sm:inline">||</span>
+                <span className="text-purple-400 font-mono text-base font-extrabold hidden sm:inline">||</span>
                 
-                <div className="flex items-center space-x-1.5 font-mono text-xs sm:text-sm text-purple-200 font-black tracking-wider bg-purple-950/30 px-3 py-1.5 rounded-xl border border-purple-500/20">
-                  <span className="text-purple-400">&lt;/&gt;</span>
+                <div className="flex items-center space-x-1.5 font-mono text-xs sm:text-sm text-purple-700 font-black tracking-wider bg-purple-50/60 px-3 py-1.5 rounded-xl border border-purple-100/50">
+                  <span className="text-purple-600">&lt;/&gt;</span>
                   <span>CSE Student</span>
                 </div>
               </motion.div>
             </div>
 
-            <p className="text-sm sm:text-base text-purple-100/90 font-medium leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed max-w-xl">
               {bioText}
             </p>
 
@@ -513,17 +519,127 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Portrait Illustration Right Panel */}
+          {/* Portrait Illustration panel */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="lg:col-span-5 flex justify-center lg:justify-end"
+            className="flex justify-center"
           >
             <InteractivePortrait
               portraitImage={portraitImage}
               onImageUpload={handleImageUpload}
             />
+          </motion.div>
+        </div>
+
+        {/* WEB VERSION: Spectacular Centered Portrait with side columns matching requested image */}
+        <div className="hidden lg:flex max-w-7xl mx-auto px-8 w-full items-stretch justify-between relative z-10 min-h-[75vh] mt-4">
+          
+          {/* Left Column: Hello & Personal Info (Width: 35%) */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-[35%] flex flex-col justify-center space-y-6 z-20 pr-4"
+          >
+            <div className="space-y-1">
+              <span className="text-3xl font-sans tracking-wide text-slate-400 font-light uppercase">
+                I AM
+              </span>
+              <h1 className="text-5xl xl:text-7xl font-sans font-black tracking-tighter text-slate-900 leading-[1.05] uppercase">
+                ABIR MAHMUD
+              </h1>
+              <h1 className="text-5xl xl:text-7xl font-sans font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 leading-[1.05] uppercase">
+                PRITAM
+              </h1>
+            </div>
+
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-sm font-sans">
+              A developer who loves blending creative frontends with scalable backends to deliver meaningful digital products.
+            </p>
+
+            <button
+              onClick={() => handleNavigateSection("projects")}
+              className="px-8 py-3.5 rounded-full font-extrabold text-xs bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:scale-105 hover:shadow-[0_8px_25px_rgba(219,39,119,0.3)] transition-all duration-300 flex items-center space-x-2 w-fit uppercase tracking-wider cursor-pointer shadow-md"
+            >
+              <span>Download Portfolio</span>
+              <ArrowRight size={13} className="text-white" />
+            </button>
+          </motion.div>
+
+          {/* Center Column: Portrait Image sitting at the bottom, perfectly fading out (Width: 30%) */}
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, ease: "easeOut", delay: 0.1 }}
+            className="w-[30%] flex flex-col justify-end relative z-10 self-end h-[680px] group/img overflow-visible"
+          >
+            <div className="w-full h-full relative flex items-end">
+              {portraitImage ? (
+                <div className="w-full h-full relative flex items-end justify-center">
+                  <img
+                    src={portraitImage}
+                    alt="Abir Mahmud Pritam"
+                    className="w-full h-[95%] object-cover object-center transition-all duration-700 hover:scale-[1.02]"
+                    style={{
+                      maskImage: 'linear-gradient(to top, transparent 0%, black 18%, black 100%)',
+                      WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 18%, black 100%)'
+                    }}
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  {/* Subtle clean bottom background blend matching #FCFAFF and #FAF9FF */}
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#FCFAFF] via-[#FCFAFF]/40 to-transparent pointer-events-none z-10" />
+
+                  {/* Interactive camera overlay for smooth portrait changes */}
+                  <label className="absolute inset-0 bg-slate-950/45 backdrop-blur-[2px] flex flex-col items-center justify-center text-white opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 cursor-pointer z-30 rounded-3xl m-4 h-[90%] self-end">
+                    <div className="p-3.5 rounded-full bg-white/10 border border-white/20 mb-2 shadow-lg">
+                      <Camera size={20} className="text-white" />
+                    </div>
+                    <span className="text-[10px] font-mono font-bold tracking-wider uppercase">Change Portrait</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              ) : (
+                <div className="w-full h-[380px] flex flex-col items-center justify-center p-6 bg-white/50 border border-purple-100 rounded-3xl text-center space-y-4 mb-12 shadow-md">
+                  <User size={50} className="text-purple-600" />
+                  <span className="text-xs font-mono font-bold text-slate-700">Creative Portrait</span>
+                  <label className="cursor-pointer py-2 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-mono font-bold flex items-center space-x-1.5 shadow-sm transition-all hover:scale-105">
+                    <Camera size={13} />
+                    <span>Upload Picture</span>
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                  </label>
+                </div>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Right Column: Web Developer Tag Display (Width: 35%) */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="w-[35%] flex flex-col justify-center items-end text-right z-20 pl-4"
+          >
+            <div className="space-y-3 font-sans text-right">
+              <h2 className="text-5xl xl:text-6xl font-black text-slate-800 tracking-tighter uppercase leading-none">
+                A WEB
+              </h2>
+              <div className="flex justify-end pr-1">
+                <div className="px-5 py-2 rounded-full bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-indigo-500/10 border border-purple-200/50 text-2xl xl:text-3xl font-mono font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 shadow-sm">
+                  &lt;/&gt;
+                </div>
+              </div>
+              <h2 className="text-5xl xl:text-6xl font-black text-slate-800 tracking-tighter uppercase leading-none">
+                DEVELOPER
+              </h2>
+            </div>
           </motion.div>
 
         </div>
@@ -1145,76 +1261,53 @@ export default function App() {
               My Insights
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif text-slate-900 mt-2">
-              Latest Blog & Social Feed
+              Latest Blog Articles
             </h2>
             <p className="text-sm sm:text-base text-slate-500 font-mono mt-3">
-              Deep-dives into graphic design, UI/UX philosophy, computer science logic, and career highlights from LinkedIn.
+              Deep-dives into graphic design, UI/UX philosophy, and computer science logic.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Left Side: Standard Blog Articles */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="flex items-center space-x-2.5 mb-2 pb-2 border-b border-purple-100">
-                <PenTool size={18} className="text-purple-600" />
-                <h3 className="text-md font-mono font-bold uppercase tracking-tight text-slate-800">
-                  Featured Articles
-                </h3>
-              </div>
-              
-              <div className="space-y-6">
-                {blogPosts.map((post) => (
-                  <motion.div
-                    key={post.id}
-                    whileHover={{ y: -4, scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className="rounded-2xl border border-purple-100/80 bg-white/75 backdrop-blur-md hover:bg-white hover:border-purple-300 hover:shadow-[0_12px_32px_rgba(168,85,247,0.06)] transition-all duration-300 flex flex-col justify-between overflow-hidden group shadow-md p-6"
-                  >
-                    <div className="space-y-3">
-                      {/* Category & Metadata */}
-                      <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
-                        <span className="px-2 py-0.5 rounded-full bg-purple-50 border border-purple-100 text-purple-700 font-bold">
-                          {post.category}
-                        </span>
-                        <div className="flex items-center space-x-2.5 font-bold">
-                          <span className="flex items-center space-x-1">
-                            <Calendar size={11} className="text-slate-400" />
-                            <span>{post.date}</span>
-                          </span>
-                        </div>
-                      </div>
-
-                      <h4 className="text-lg font-serif font-bold text-slate-900 tracking-tight group-hover:text-purple-700 transition-colors line-clamp-2">
-                        {post.title}
-                      </h4>
-
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3 font-sans">
-                        {post.summary}
-                      </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            {blogPosts.map((post) => (
+              <motion.div
+                key={post.id}
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="rounded-2xl border border-purple-100/80 bg-white/75 backdrop-blur-md hover:bg-white hover:border-purple-300 hover:shadow-[0_12px_32px_rgba(168,85,247,0.06)] transition-all duration-300 flex flex-col justify-between overflow-hidden group shadow-md p-6"
+              >
+                <div className="space-y-3">
+                  {/* Category & Metadata */}
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
+                    <span className="px-2 py-0.5 rounded-full bg-purple-50 border border-purple-100 text-purple-700 font-bold">
+                      {post.category}
+                    </span>
+                    <div className="flex items-center space-x-2.5 font-bold">
+                      <span className="flex items-center space-x-1">
+                        <Calendar size={11} className="text-slate-400" />
+                        <span>{post.date}</span>
+                      </span>
                     </div>
+                  </div>
 
-                    <button
-                      onClick={() => setSelectedPost(post)}
-                      className="mt-4 inline-flex items-center space-x-1.5 text-xs font-mono font-bold text-slate-700 hover:text-purple-700 transition-colors cursor-pointer w-fit self-start"
-                    >
-                      <span>Read Article</span>
-                      <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform duration-200" />
-                    </button>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+                  <h4 className="text-lg font-serif font-bold text-slate-900 tracking-tight group-hover:text-purple-700 transition-colors line-clamp-2">
+                    {post.title}
+                  </h4>
 
-            {/* Right Side: LinkedIn Social Feed */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center space-x-2.5 mb-2 pb-2 border-b border-purple-100">
-                <Linkedin size={18} className="text-[#0a66c2]" fill="currentColor" />
-                <h3 className="text-md font-mono font-bold uppercase tracking-tight text-slate-800">
-                  LinkedIn Updates
-                </h3>
-              </div>
-              <LinkedInFeed linkedInPosts={initialLinkedInPosts} portraitImage={portraitImage} />
-            </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-4 font-sans">
+                    {post.summary}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setSelectedPost(post)}
+                  className="mt-6 inline-flex items-center space-x-1.5 text-xs font-mono font-bold text-slate-700 hover:text-purple-700 transition-colors cursor-pointer w-fit self-start"
+                >
+                  <span>Read Article</span>
+                  <ArrowRight size={12} className="transform group-hover:translate-x-1 transition-transform duration-200" />
+                </button>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

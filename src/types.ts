@@ -72,27 +72,3 @@ export interface UserCustomizer {
   bioText: string;
 }
 
-export interface LinkedInComment {
-  id: string;
-  author: string;
-  avatar?: string;
-  headline: string;
-  text: string;
-  date: string;
-  likes: number;
-}
-
-export interface LinkedInPost {
-  id: string;
-  author: string;
-  avatar?: string;
-  headline: string;
-  date: string;
-  text: string;
-  hashtags: string[];
-  imageType: "ucics" | "robosoccer" | "academic" | "deeplearning";
-  likes: number;
-  comments: LinkedInComment[];
-  reposts: number;
-  hasLiked?: boolean;
-}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
-export function BackgroundCodeRain() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+export const BackgroundCodeRain: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -10,84 +10,82 @@ export function BackgroundCodeRain() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
-    let width = (canvas.width = canvas.parentElement?.offsetWidth || window.innerWidth);
-    let height = (canvas.height = canvas.parentElement?.offsetHeight || window.innerHeight);
+    let animationFrameId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
-    // Characters list: alphanumeric and developer-centric tokens
-    const charList = "0101<>{}[]constReactVitePythonFigmaimportfunctionreturnCSS$=_=>".split("");
-    const fontSize = 12;
-    let columns = Math.floor(width / fontSize);
+    // Resize handler to keep canvas full screen
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      
+      // Reinitialize drops array on resize
+      const columns = Math.floor(width / fontSize);
+      drops = Array(columns).fill(1);
+    };
 
-    // Track the vertical coordinate (y-position) of each rain column
-    let drops: number[] = Array(columns).fill(1);
+    window.addEventListener("resize", handleResize);
 
-    // Handle Resize observer gracefully
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        width = canvas.width = entry.contentRect.width;
-        height = canvas.height = entry.contentRect.height;
-        columns = Math.floor(width / fontSize);
-        drops = Array(columns).fill(1);
-      }
-    });
-
-    if (canvas.parentElement) {
-      resizeObserver.observe(canvas.parentElement);
-    }
+    // Characters for the coding animation
+    const charList = "01<>{}[];+-=*&%$#@!/\\()_".split("");
+    const fontSize = 14;
+    const columns = Math.floor(width / fontSize);
+    
+    // Drops array tracks the y-coordinate of the drop for each column
+    let drops = Array(columns).fill(1);
 
     const draw = () => {
-      // Semi-transparent dark background overlay to create a trailing motion-blur fade effect
-      // This is crucial for mix-blend-screen: the dark color will fade away, leaving beautiful glowing trails
-      ctx.fillStyle = "rgba(15, 8, 32, 0.08)";
+      // Semi-transparent overlay to create a trailing fade effect on the light theme
+      ctx.fillStyle = "rgba(250, 249, 255, 0.12)";
       ctx.fillRect(0, 0, width, height);
 
-      // Set font settings once
-      ctx.font = `bold ${fontSize}px "JetBrains Mono", monospace`;
+      // Set font settings
+      ctx.font = `bold ${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
-        // Randomly choose a character
+        // Randomly select a code character
         const char = charList[Math.floor(Math.random() * charList.length)];
         
-        // Use bright, highly visible neon and white colors that pop on the deep background
+        // Use beautiful light-purple, violet, and soft indigo colors that blend perfectly on the light background
         const rand = Math.random();
-        if (rand > 0.96) {
-          ctx.fillStyle = "rgba(255, 255, 255, 0.98)"; // brilliant glowing white highlight
-        } else if (rand > 0.8) {
-          ctx.fillStyle = "rgba(232, 121, 249, 0.85)"; // vibrant neon pink/magenta
+        if (rand > 0.95) {
+          ctx.fillStyle = "rgba(109, 40, 217, 0.9)";  // Deep purple accent
+        } else if (rand > 0.75) {
+          ctx.fillStyle = "rgba(139, 92, 246, 0.75)"; // Violet
         } else if (rand > 0.5) {
-          ctx.fillStyle = "rgba(192, 132, 252, 0.8)";  // glowing lavender
+          ctx.fillStyle = "rgba(167, 139, 250, 0.6)";  // Soft lavender
         } else {
-          ctx.fillStyle = "rgba(168, 85, 247, 0.65)";  // glowing royal violet
+          ctx.fillStyle = "rgba(196, 181, 253, 0.45)"; // Very light purple
         }
 
         ctx.fillText(char, i * fontSize, drops[i] * fontSize);
 
-        // Reset drop position to the top once it hits the bottom
+        // Reset drop back to top once it reaches the bottom or randomly
         if (drops[i] * fontSize > height && Math.random() > 0.975) {
           drops[i] = 0;
         }
 
-        // Increment drop y-coordinate
+        // Move drop down
         drops[i]++;
       }
 
-      animationId = requestAnimationFrame(draw);
+      animationFrameId = requestAnimationFrame(draw);
     };
 
-    // Begin render loop
+    // Start the animation loop
     draw();
 
     return () => {
-      cancelAnimationFrame(animationId);
-      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none mix-blend-screen opacity-90"
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.55] mix-blend-multiply"
     />
   );
-}
+};
