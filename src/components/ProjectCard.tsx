@@ -150,7 +150,7 @@ export default function ProjectCard({ project, accentClass }: ProjectCardProps) 
       viewport={{ once: true, margin: "-80px" }}
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 100, damping: 15 }}
-      className={`group bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden border border-purple-100/80 hover:bg-white transition-all duration-300 flex flex-col h-full shadow-md ${getAccentHover()}`}
+      className={`group bg-purple-100/40 backdrop-blur-md rounded-2xl overflow-hidden border border-purple-200/50 hover:bg-purple-100/60 transition-all duration-300 flex flex-col h-full shadow-md ${getAccentHover()}`}
     >
       {/* Mock visuals */}
       <div className="relative overflow-hidden shrink-0">

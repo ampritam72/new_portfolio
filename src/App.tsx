@@ -116,7 +116,7 @@ export default function App() {
   const bioText = "A versatile Full-Stack Developer, Graphic & UI/UX Designer, and B.Sc. Computer Science & Engineering (CSE) student at Varendra University. Fusing design elegance with engineering rigor, I build high-performance full-stack web applications, dynamic interactive client interfaces, and robust backend pipelines using React, Tailwind, Python, C/C++, and SQL Databases.";
 
   // Custom uploaded portrait picture
-  const [portraitImage, setPortraitImage] = useState<string | null>("/src/assets/images/abir_artistic_portrait_1784339951787.jpg");
+  const [portraitImage, setPortraitImage] = useState<string | null>("/portrait.jpg");
 
   // Projects filter
   const [projects, setProjects] = useState<Project[]>(initialProjects);
@@ -403,16 +403,13 @@ export default function App() {
         {/* Base light theme background */}
         <div className="absolute inset-0 bg-[#FCFAFF]" />
         
-        {/* The uploaded bgpic.png background image, scaled slightly and blurred by 60% */}
+        {/* The uploaded bgpic.png background image used directly for the whole website */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 filter blur-[18px] opacity-[0.65]"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.7]"
           style={{ 
-            backgroundImage: `url("/src/assets/images/bgpic.png")`,
+            backgroundImage: `url("/bgpic.png")`,
           }}
         />
-        
-        {/* Beautiful light white-purple tint overlay to keep the theme incredibly bright and matching "white theme website" */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-purple-50/50 to-white/80 mix-blend-overlay" />
         
         {/* Global matrix-style coding rain streaming across the entire website, fixed behind everything */}
         <div className="absolute inset-0 opacity-100">
@@ -456,13 +453,13 @@ export default function App() {
               <div className="w-[280px] h-[280px] rounded-full border-[8px] border-purple-600 p-1 bg-white shadow-[0_16px_48px_rgba(147,51,234,0.25)] flex items-center justify-center overflow-hidden">
                 <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
                   <img
-                    src="/src/assets/images/mbpic.png"
+                    src="/mbpic.png"
                     alt="Abir Mahmud Pritam"
                     className="w-full h-full object-cover object-center"
                     style={{ minWidth: '100%', minHeight: '100%' }}
                     onError={(e) => {
                       // Fallback if mbpic.png isn't fully loaded yet
-                      (e.target as HTMLImageElement).src = portraitImage || "/src/assets/images/abir_artistic_portrait_1784339951787.jpg";
+                      (e.target as HTMLImageElement).src = portraitImage || "/portrait.jpg";
                     }}
                     referrerPolicy="no-referrer"
                   />
@@ -506,21 +503,21 @@ export default function App() {
             </p>
 
             {/* Social Links Row exactly underneath description */}
-            <div className="flex items-center space-x-4 pt-1.5 pb-2">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="Facebook">
-                <Facebook size={18} />
+            <div className="flex items-center space-x-3 pt-1.5 pb-2">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="Facebook">
+                <Facebook size={18} className="text-white" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="Instagram">
-                <Instagram size={18} />
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="Instagram">
+                <Instagram size={18} className="text-white" />
               </a>
-              <a href="https://linkedin.com/in/abirmahmudpritam" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="LinkedIn">
-                <Linkedin size={18} />
+              <a href="https://linkedin.com/in/abirmahmudpritam" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="LinkedIn">
+                <Linkedin size={18} className="text-white" />
               </a>
-              <a href="https://github.com/abirmahmudpritam" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="GitHub">
-                <Github size={18} />
+              <a href="https://github.com/abirmahmudpritam" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="GitHub">
+                <Github size={18} className="text-white" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="YouTube">
-                <Youtube size={18} />
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="YouTube">
+                <Youtube size={18} className="text-white" />
               </a>
             </div>
 
@@ -588,7 +585,7 @@ export default function App() {
               {portraitImage ? (
                 <div className="w-full h-full relative flex items-end justify-center">
                   <img
-                    src="/src/assets/images/webpic.png"
+                    src="/webpic.png"
                     alt="Abir Mahmud Pritam"
                     className="w-full h-[95%] object-cover object-center transition-all duration-700 hover:scale-[1.02]"
                     style={{
@@ -597,7 +594,7 @@ export default function App() {
                     }}
                     onError={(e) => {
                       // Fallback if webpic.png isn't fully loaded or available yet
-                      (e.target as HTMLImageElement).src = portraitImage || "/src/assets/images/abir_artistic_portrait_1784339951787.jpg";
+                      (e.target as HTMLImageElement).src = portraitImage || "/portrait.jpg";
                     }}
                     referrerPolicy="no-referrer"
                   />
@@ -680,7 +677,7 @@ export default function App() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
               whileHover={{ y: -6, scale: 1.015 }}
-              className="p-6 sm:p-7 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/80 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 flex flex-col justify-between group shadow-md"
+              className="p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 flex flex-col justify-between group shadow-md"
             >
               <div className="space-y-4">
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/20 flex items-center justify-center">
@@ -700,7 +697,7 @@ export default function App() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 100, damping: 15 }}
               whileHover={{ y: -6, scale: 1.015 }}
-              className="p-6 sm:p-7 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/80 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 flex flex-col justify-between group shadow-md"
+              className="p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 flex flex-col justify-between group shadow-md"
             >
               <div className="space-y-4">
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/20 flex items-center justify-center">
@@ -720,7 +717,7 @@ export default function App() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 100, damping: 15 }}
               whileHover={{ y: -6, scale: 1.015 }}
-              className="p-6 sm:p-7 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/80 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 flex flex-col justify-between group shadow-md"
+              className="p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 flex flex-col justify-between group shadow-md"
             >
               <div className="space-y-4">
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/20 flex items-center justify-center">
@@ -754,7 +751,7 @@ export default function App() {
                 </h2>
               </div>
 
-              <div className="p-6 sm:p-7 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/80 space-y-4 text-sm sm:text-base leading-relaxed text-slate-700 shadow-md">
+              <div className="p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 space-y-4 text-sm sm:text-base leading-relaxed text-slate-700 shadow-md">
                 <p>
                   Hey there, I'm <strong className="text-purple-700 font-bold">Pritam</strong>, a 23-year-old Full-Stack Developer, Graphic & UI/UX Designer from Bangladesh. I'm currently studying in the Department of CSE at Varendra University, while building high-fidelity full-stack applications. Fusing algorithmic logic with polished UI design, I craft interactive systems from responsive frontend views down to scalable database and server structures.
                 </p>
@@ -809,7 +806,7 @@ export default function App() {
                       key={i}
                       whileHover={{ y: -2, scale: 1.015 }}
                       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className="p-4 rounded-xl bg-white/75 backdrop-blur-md border border-purple-100/60 hover:border-purple-300 hover:bg-white flex items-start space-x-2.5 shadow-sm hover:shadow-md transition-all duration-200"
+                      className="p-4 rounded-xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 flex items-start space-x-2.5 shadow-sm hover:shadow-md transition-all duration-200"
                     >
                       <CheckCircle2 size={16} className={`mt-0.5 shrink-0 ${getAccentTextClass()}`} />
                       <span className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">{cert}</span>
@@ -877,7 +874,7 @@ export default function App() {
                     key={idx}
                     whileHover={{ y: -4, scale: 1.03 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className="p-5 rounded-xl bg-white/75 backdrop-blur-md border border-purple-100/80 hover:border-purple-300 hover:bg-white text-center flex flex-col items-center justify-between space-y-3 transition-all duration-300 group hover:shadow-[0_12px_32px_rgba(168,85,247,0.08)] shadow-sm"
+                    className="p-5 rounded-xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 text-center flex flex-col items-center justify-between space-y-3 transition-all duration-300 group hover:shadow-[0_12px_32px_rgba(168,85,247,0.08)] shadow-sm"
                   >
                     <div className={`p-3 rounded-xl ${brand.bg} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                       <img
@@ -931,7 +928,7 @@ export default function App() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
-                  className="relative group space-y-3 p-6 sm:p-7 rounded-2xl bg-white/90 backdrop-blur-md border border-purple-100/45 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.06)] transition-all duration-300 shadow-sm"
+                  className="relative group space-y-3 p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.06)] transition-all duration-300 shadow-sm"
                 >
                   {/* Timeline node centered vertically with the padding */}
                   <div className="absolute -left-[35px] top-[30px] h-4.5 w-4.5 rounded-full bg-white border-4 border-purple-600 shadow-sm group-hover:scale-110 group-hover:bg-purple-100 transition-all duration-300" />
@@ -971,7 +968,7 @@ export default function App() {
               className="lg:col-span-5 space-y-6"
             >
               {/* Interactive Profile status card */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-white/90 backdrop-blur-md border border-purple-150 hover:border-purple-300 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 shadow-md space-y-5">
+              <div className="p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 shadow-md space-y-5">
                 <div className="flex items-center space-x-4">
                   <div className="relative">
                     <div className="h-14 w-14 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center text-white font-serif text-lg font-bold shadow-md">
@@ -991,11 +988,11 @@ export default function App() {
 
                 {/* Professional Metrics */}
                 <div className="grid grid-cols-2 gap-4 pt-1">
-                  <div className="p-3.5 rounded-xl bg-purple-50/50 border border-purple-100/60 text-center hover:bg-white hover:shadow-sm transition-all">
+                  <div className="p-3.5 rounded-xl bg-purple-100/30 border border-purple-200/50 text-center hover:bg-purple-100/50 hover:shadow-sm transition-all">
                     <span className="block text-2xl font-display font-extrabold text-purple-700">37+</span>
                     <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider">PROJECTS INKED</span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-purple-50/50 border border-purple-100/60 text-center hover:bg-white hover:shadow-sm transition-all">
+                  <div className="p-3.5 rounded-xl bg-purple-100/30 border border-purple-200/50 text-center hover:bg-purple-100/50 hover:shadow-sm transition-all">
                     <span className="block text-2xl font-display font-extrabold text-purple-700">98%</span>
                     <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-wider">SATISFACTION</span>
                   </div>
@@ -1018,7 +1015,7 @@ export default function App() {
               </div>
 
               {/* My Professional Creed */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-white/90 backdrop-blur-md border border-purple-150 hover:border-purple-300 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 shadow-md space-y-4">
+              <div className="p-6 sm:p-7 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 shadow-md space-y-4">
                 <h5 className="font-display font-extrabold text-slate-800 text-sm sm:text-base tracking-wide uppercase flex items-center space-x-2.5 border-b border-purple-100/50 pb-2.5">
                   <Sparkles size={16} className="text-purple-600 animate-pulse" />
                   <span>My Design Manifesto</span>
@@ -1151,7 +1148,7 @@ export default function App() {
                   key={pub.id}
                   whileHover={{ y: -4, scale: 1.008 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="p-6 md:p-8 rounded-2xl border border-purple-100/80 bg-white/75 backdrop-blur-md hover:bg-white hover:border-purple-300 hover:shadow-[0_16px_40px_rgba(168,85,247,0.06)] transition-all duration-300 shadow-md"
+                  className="p-6 md:p-8 rounded-2xl border border-purple-200/50 bg-purple-100/40 backdrop-blur-md hover:bg-purple-100/60 hover:border-purple-300 hover:shadow-[0_16px_40px_rgba(168,85,247,0.06)] transition-all duration-300 shadow-md"
                 >
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div className="space-y-4 flex-1">
@@ -1287,7 +1284,7 @@ export default function App() {
                 key={post.id}
                 whileHover={{ y: -6, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="rounded-2xl border border-purple-100/80 bg-white/75 backdrop-blur-md hover:bg-white hover:border-purple-300 hover:shadow-[0_12px_32px_rgba(168,85,247,0.06)] transition-all duration-300 flex flex-col justify-between overflow-hidden group shadow-md p-6"
+                className="rounded-2xl border border-purple-200/50 bg-purple-100/40 backdrop-blur-md hover:bg-purple-100/60 hover:border-purple-300 hover:shadow-[0_12px_32px_rgba(168,85,247,0.06)] transition-all duration-300 flex flex-col justify-between overflow-hidden group shadow-md p-6"
               >
                 <div className="space-y-3">
                   {/* Category & Metadata */}
@@ -1342,12 +1339,12 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-4xl mx-auto items-stretch">
-            {/* Left direct channel info */}
+            {/* Left Column: Contact and Social Channels */}
             <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
               <motion.div
                 whileHover={{ y: -4, scale: 1.015 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="p-6 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 space-y-4 shadow-md flex-1 flex flex-col justify-center"
+                className="p-6 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 space-y-4 shadow-md flex-1 flex flex-col justify-center"
               >
                 <h4 className="font-display font-bold text-base sm:text-lg text-slate-800">Contact Channels</h4>
                 <div className="space-y-4 font-mono text-xs sm:text-sm text-slate-700">
@@ -1370,21 +1367,21 @@ export default function App() {
               <motion.div
                 whileHover={{ y: -4, scale: 1.015 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="p-6 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 space-y-4 shadow-md"
+                className="p-6 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 space-y-4 shadow-md"
               >
                 <h5 className="font-display font-bold text-xs sm:text-sm text-slate-800">Find me on social media</h5>
-                <div className="flex items-center space-x-4 pt-1">
-                  <a href="https://facebook.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-purple-600 hover:scale-110 transition-all" title="Facebook">
-                    <Facebook size={20} />
+                <div className="flex items-center space-x-3 pt-1">
+                  <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="Facebook">
+                    <Facebook size={18} className="text-white" />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-purple-600 hover:scale-110 transition-all" title="Instagram">
-                    <Instagram size={20} />
+                  <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="Instagram">
+                    <Instagram size={18} className="text-white" />
                   </a>
-                  <a href="https://linkedin.com/in/abirmahmudpritam" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-purple-600 hover:scale-110 transition-all" title="LinkedIn">
-                    <Linkedin size={20} />
+                  <a href="https://linkedin.com/in/abirmahmudpritam" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="LinkedIn">
+                    <Linkedin size={18} className="text-white" />
                   </a>
-                  <a href="https://github.com/abirmahmudpritam" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-purple-600 hover:scale-110 transition-all" title="GitHub">
-                    <Github size={20} />
+                  <a href="https://github.com/abirmahmudpritam" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center hover:scale-110 transition-all shadow-md hover:shadow-purple-200" title="GitHub">
+                    <Github size={18} className="text-white" />
                   </a>
                 </div>
               </motion.div>
@@ -1395,7 +1392,7 @@ export default function App() {
               <motion.form
                 onSubmit={handleContactSubmit}
                 whileHover={{ y: -2 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 space-y-5 h-full flex flex-col justify-between shadow-md"
+                className="p-6 sm:p-8 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 space-y-5 h-full flex flex-col justify-between shadow-md"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
@@ -1500,7 +1497,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: "spring", duration: 0.45, bounce: 0.15 }}
-              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border border-purple-200 bg-white p-6 sm:p-8 shadow-2xl space-y-6 text-slate-700"
+              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border border-purple-200 bg-purple-50/95 backdrop-blur-md p-6 sm:p-8 shadow-2xl space-y-6 text-slate-700"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}

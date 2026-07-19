@@ -59,7 +59,7 @@ export default function SkillSection({ skills, accentClass }: SkillSectionProps)
               viewport={{ once: true, margin: "-80px" }}
               whileHover={{ y: -5, scale: 1.015 }}
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              className="p-6 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/80 hover:border-purple-300 hover:bg-white hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 group shadow-md"
+              className="p-6 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-[0_16px_40px_rgba(168,85,247,0.08)] transition-all duration-300 group shadow-md"
             >
               <div className="flex items-center justify-between mb-4.5">
                 <div className="flex items-center space-x-3.5">
@@ -103,7 +103,7 @@ export default function SkillSection({ skills, accentClass }: SkillSectionProps)
           viewport={{ once: true, margin: "-80px" }}
           whileHover={{ y: -3 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="p-6 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/60 hover:border-purple-300 hover:bg-white hover:shadow-md transition-all duration-300 space-y-3 shadow-sm"
+          className="p-6 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-md transition-all duration-300 space-y-3 shadow-sm"
         >
           <div className="flex items-center space-x-2.5 text-slate-800">
             <Palette size={18} className="text-purple-500 animate-pulse" />
@@ -120,7 +120,7 @@ export default function SkillSection({ skills, accentClass }: SkillSectionProps)
           viewport={{ once: true, margin: "-80px" }}
           whileHover={{ y: -3 }}
           transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="p-6 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/60 hover:border-purple-300 hover:bg-white hover:shadow-md transition-all duration-300 space-y-3 shadow-sm"
+          className="p-6 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-md transition-all duration-300 space-y-3 shadow-sm"
         >
           <div className="flex items-center space-x-2.5 text-slate-800">
             <Terminal size={18} className="text-purple-500 animate-pulse" />
@@ -137,7 +137,7 @@ export default function SkillSection({ skills, accentClass }: SkillSectionProps)
           viewport={{ once: true, margin: "-80px" }}
           whileHover={{ y: -3 }}
           transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          className="p-6 rounded-2xl bg-white/75 backdrop-blur-md border border-purple-100/60 hover:border-purple-300 hover:bg-white hover:shadow-md transition-all duration-300 space-y-3 shadow-sm"
+          className="p-6 rounded-2xl bg-purple-100/40 backdrop-blur-md border border-purple-200/50 hover:border-purple-300 hover:bg-purple-100/60 hover:shadow-md transition-all duration-300 space-y-3 shadow-sm"
         >
           <div className="flex items-center space-x-2.5 text-slate-800">
             <Database size={18} className="text-purple-500 animate-pulse" />
