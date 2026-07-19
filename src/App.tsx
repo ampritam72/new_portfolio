@@ -48,6 +48,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { TypewriterCode } from "./components/TypewriterCode";
 import { BackgroundCodeRain } from "./components/BackgroundCodeRain";
 import { InteractivePortrait } from "./components/InteractivePortrait";
+import { TypewriterGreeting } from "./components/TypewriterGreeting";
 
 import { Project, Skill, Tool, Publication } from "./types";
 import {
@@ -429,64 +430,72 @@ export default function App() {
       {/* Hero Presentation Stage */}
       <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 lg:pb-0 overflow-hidden z-10">
         
-        {/* MOBILE VERSION: Keep the original layout for mobile view (vertical stack) */}
-        <div className="lg:hidden max-w-7xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 gap-12 items-center relative z-10 pt-4">
-          {/* Hero Bio Left Panel */}
+        {/* MOBILE VERSION: Custom layout for mobile view (vertical stack with requested order) */}
+        <div className="lg:hidden max-w-7xl mx-auto px-4 sm:px-6 w-full flex flex-col space-y-6 items-start relative z-10 pt-4 text-left">
+          
+          {/* 1. Badge / Card */}
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-100/80 border border-purple-200/80 w-fit shadow-sm self-start">
+            <span className="flex h-2 w-2 relative">
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${getAccentBgClass()}`}></span>
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${getAccentBgClass()}`}></span>
+            </span>
+            <span className="text-xs font-mono font-bold text-purple-700 tracking-wide uppercase">
+              Available for Projects & Tech Internships
+            </span>
+          </div>
+
+          {/* 2. Profile picture in Clean Large Purple Round Frame */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+            className="flex justify-center w-full my-6"
+          >
+            <div className="relative w-[300px] h-[300px] flex items-center justify-center">
+              {/* Clean round purple border frame, made larger and with no background shapes */}
+              <div className="w-[280px] h-[280px] rounded-full border-[8px] border-purple-600 p-1 bg-white shadow-[0_16px_48px_rgba(147,51,234,0.25)] flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
+                  <img
+                    src="/src/assets/images/mbpic.png"
+                    alt="Abir Mahmud Pritam"
+                    className="w-full h-full object-cover object-center"
+                    style={{ minWidth: '100%', minHeight: '100%' }}
+                    onError={(e) => {
+                      // Fallback if mbpic.png isn't fully loaded yet
+                      (e.target as HTMLImageElement).src = portraitImage || "/src/assets/images/abir_artistic_portrait_1784339951787.jpg";
+                    }}
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* 3. Hello, I'm Abir Mahmud Pritam and other elements */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 flex flex-col justify-center"
+            className="space-y-5 flex flex-col items-start w-full"
           >
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-100/80 border border-purple-200/80 w-fit shadow-sm">
-              <span className="flex h-2 w-2 relative">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${getAccentBgClass()}`}></span>
-                <span className={`relative inline-flex rounded-full h-2 w-2 ${getAccentBgClass()}`}></span>
-              </span>
-              <span className="text-xs font-mono font-bold text-purple-700 tracking-wide uppercase">
-                Available for Projects & Tech Internships
-              </span>
-            </div>
-
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-slate-900 tracking-tight leading-none">
-                <motion.span 
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="inline-block"
-                >
-                  Hello, I'm
-                </motion.span>
-                <br />
-                <motion.span 
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100, damping: 12 }}
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-600 font-black tracking-tight drop-shadow-sm"
-                >
-                  {name}
-                </motion.span>
-              </h1>
+            <div className="space-y-2.5 w-full">
+              <TypewriterGreeting isMobile={true} className="text-left" />
               
-              {/* Dynamic Subheading: developer,graphics and ui ux || CSE Student */}
+              {/* Dynamic Subheading Badge */}
               <motion.div 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-1"
+                className="flex flex-wrap items-center gap-x-2.5 gap-y-2 pt-1"
               >
-                <div className="flex items-center space-x-2 bg-purple-50/80 border border-purple-200/50 px-3.5 py-1.5 rounded-full shadow-sm hover:border-purple-300 transition-colors">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-600 animate-ping" />
-                  <span className="text-xs sm:text-sm font-mono font-black uppercase text-purple-700">
-                    developer, graphics and ui ux
+                <div className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200/60 shadow-sm">
+                  <Sparkles size={13} className="text-purple-600 animate-pulse" />
+                  <span className="text-xs font-semibold text-purple-700">
+                    Full-Stack Developer, Graphic & UI/UX Designer
                   </span>
                 </div>
-                
-                <span className="text-purple-400 font-mono text-base font-extrabold hidden sm:inline">||</span>
-                
-                <div className="flex items-center space-x-1.5 font-mono text-xs sm:text-sm text-purple-700 font-black tracking-wider bg-purple-50/60 px-3 py-1.5 rounded-xl border border-purple-100/50">
-                  <span className="text-purple-600">&lt;/&gt;</span>
+                <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-purple-50/60 border border-purple-100/50 text-xs text-purple-700 font-semibold shadow-sm">
+                  <span className="text-purple-600 font-bold">&lt;/&gt;</span>
                   <span>CSE Student</span>
                 </div>
               </motion.div>
@@ -496,11 +505,32 @@ export default function App() {
               {bioText}
             </p>
 
+            {/* Social Links Row exactly underneath description */}
+            <div className="flex items-center space-x-4 pt-1.5 pb-2">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="Facebook">
+                <Facebook size={18} />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="Instagram">
+                <Instagram size={18} />
+              </a>
+              <a href="https://linkedin.com/in/abirmahmudpritam" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="LinkedIn">
+                <Linkedin size={18} />
+              </a>
+              <a href="https://github.com/abirmahmudpritam" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="GitHub">
+                <Github size={18} />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-700 hover:scale-110 transition-all shadow-sm" title="YouTube">
+                <Youtube size={18} />
+              </a>
+            </div>
+
             {/* Developer interactive terminal code block with high fidelity continuous typing animation */}
-            <TypewriterCode />
+            <div className="w-full text-left">
+              <TypewriterCode />
+            </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 w-full">
               <button
                 onClick={() => handleNavigateSection("contact")}
                 className={`px-6 py-3 rounded-xl font-bold text-sm text-white transition-all shadow-md flex items-center space-x-2 cursor-pointer ${getAccentBgClass()}`}
@@ -518,19 +548,6 @@ export default function App() {
               </button>
             </div>
           </motion.div>
-
-          {/* Portrait Illustration panel */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, x: 40 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="flex justify-center"
-          >
-            <InteractivePortrait
-              portraitImage={portraitImage}
-              onImageUpload={handleImageUpload}
-            />
-          </motion.div>
         </div>
 
         {/* WEB VERSION: Spectacular Centered Portrait with side columns matching requested image */}
@@ -543,16 +560,8 @@ export default function App() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="w-[35%] flex flex-col justify-center space-y-6 z-20 pr-4"
           >
-            <div className="space-y-1">
-              <span className="text-3xl font-sans tracking-wide text-slate-400 font-light uppercase">
-                I AM
-              </span>
-              <h1 className="text-5xl xl:text-7xl font-sans font-black tracking-tighter text-slate-900 leading-[1.05] uppercase">
-                ABIR MAHMUD
-              </h1>
-              <h1 className="text-5xl xl:text-7xl font-sans font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 leading-[1.05] uppercase">
-                PRITAM
-              </h1>
+            <div className="space-y-2">
+              <TypewriterGreeting isMobile={false} className="text-left" />
             </div>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-sm font-sans">
@@ -579,12 +588,16 @@ export default function App() {
               {portraitImage ? (
                 <div className="w-full h-full relative flex items-end justify-center">
                   <img
-                    src={portraitImage}
+                    src="/src/assets/images/webpic.png"
                     alt="Abir Mahmud Pritam"
                     className="w-full h-[95%] object-cover object-center transition-all duration-700 hover:scale-[1.02]"
                     style={{
                       maskImage: 'linear-gradient(to top, transparent 0%, black 18%, black 100%)',
                       WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 18%, black 100%)'
+                    }}
+                    onError={(e) => {
+                      // Fallback if webpic.png isn't fully loaded or available yet
+                      (e.target as HTMLImageElement).src = portraitImage || "/src/assets/images/abir_artistic_portrait_1784339951787.jpg";
                     }}
                     referrerPolicy="no-referrer"
                   />
